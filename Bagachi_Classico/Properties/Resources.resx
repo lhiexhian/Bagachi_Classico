@@ -118,8 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="heal2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\HEAL\heal2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dice2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\heal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dice1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\IDLE\Idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dice5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dice6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Idle4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\IDLE\Idle4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,14 +145,17 @@
   <data name="block4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\BLOCK\block4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heal1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\HEAL\heal1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="block2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BLOCK\block2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="heal3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\HEAL\heal3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="block2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\BLOCK\block2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dice3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="block" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\block.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="block3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\BLOCK\block3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,8 +166,8 @@
   <data name="attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\ATTACK\attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\ATTACK\attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="heal2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\HEAL\heal2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="heal4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\HEAL\heal4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,19 +178,31 @@
   <data name="attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\ATTACK\attack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dice4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\BUTTONS\DICE\dice4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heal1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\HEAL\heal1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\ATTACK\attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Idle3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\IDLE\Idle3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\IDLE\Idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="attack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\BUTTONS\attack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="block" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\BUTTONS\block.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="spit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\SPIT\spit1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\BUTTONS\heal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="spit2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\SPIT\spit2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spit3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\SPIT\spit3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spit4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\SPIT\spit4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

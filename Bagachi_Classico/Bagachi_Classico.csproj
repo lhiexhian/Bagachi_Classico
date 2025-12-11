@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuessOddEven.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuessOddEven.Designer.cs">
+      <DependentUpon>GuessOddEven.cs</DependentUpon>
+    </Compile>
     <Compile Include="metaspace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,8 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sharedAppData.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuessOddEven.resx">
+      <DependentUpon>GuessOddEven.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="metaspace.resx">
       <DependentUpon>metaspace.cs</DependentUpon>
@@ -145,6 +155,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BUTTONS\heal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\DICE\dice6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SPIT\spit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SPIT\spit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SPIT\spit3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SPIT\spit4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
