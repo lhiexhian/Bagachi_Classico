@@ -44,6 +44,7 @@
             this.coinValue = new System.Windows.Forms.Panel();
             this.coinbar2 = new System.Windows.Forms.Panel();
             this.coinValue2 = new System.Windows.Forms.Panel();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.spit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2)).BeginInit();
@@ -199,6 +200,10 @@
             this.coinValue2.Size = new System.Drawing.Size(150, 50);
             this.coinValue2.TabIndex = 0;
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // metaspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,5 +257,6 @@
         private System.Windows.Forms.Panel coinValue;
         private System.Windows.Forms.Panel coinbar2;
         private System.Windows.Forms.Panel coinValue2;
+        private System.Windows.Forms.Timer timer2;
     }
 }

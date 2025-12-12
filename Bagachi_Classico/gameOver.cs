@@ -10,31 +10,36 @@ using System.Windows.Forms;
 
 namespace Bagachi_Classico
 {
-    public partial class GuessOddEven : Form
+    public partial class gameOver : Form
     {
-        bool isEven;
-        public GuessOddEven()
+        public gameOver()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            isEven = false;
-            sharedAppData.guess = isEven;
+
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            metaspace ms = new metaspace();
+            ms.Show();
             this.Close();
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            isEven = true;
-            sharedAppData.guess = isEven;
             this.Close();
         }
 
-        private void keepChoice_CheckedChanged(object sender, EventArgs e)
+        private void gameOver_Shown(object sender, EventArgs e)
         {
-            sharedAppData.keepChoice = true;
+
+            timer.Text = $"ELAPSED TIME: {sharedAppData.time}";
+            label2.Text = sharedAppData.winner;
         }
     }
 }

@@ -26,125 +26,62 @@ namespace Bagachi_Classico
         int coin = 3;
         int coin2 = 3;
         int rngCounter = 0;
+        int mil = 0;
+        int minutes = 0;
+        int seconds = 0;
+        int milliseconds = 0;
 
-        void RefreshCoin()
+        void RefreshCoin(int a, Panel ap, ref int ac, int b, Panel bp, ref int bc)
         {
-            //if attack was performed, reduce coin by 1
-            //else if block was performed, that attack does no damage
-            //else if heal was performed, increase coin by 1 (max 3)
-            // Update coin UI accordingly
-            // take account of who went first
-            // take account of what action the opponent took
-            // Consider both Scenarios: Player goes first, Enemy goes first
+            if (a == 1 && b != 2) bc = Math.Max(bc - 1, 0); // A attacks unless B blocked
+            if (b == 1 && a != 2) ac = Math.Max(ac - 1, 0); 
+            if (a == 3 && b != 1) ac = Math.Min(ac + 1, 3); // A heals if not attacked by B
+            if (b == 3 && a != 1) bc = Math.Min(bc + 1, 3); // B heals if not attacked by A
 
-            //if (playerGoesFirst)
-            //    switch (pendingAction)
-            //    {
-            //        case 1: // attack
-            //            if (coin2 > 0)
-            //            { 
-            //                if (action2 != 2)
-            //                {
-            //                    coinValue2.Location = new Point(coinValue2.Location.X - 50, coinValue2.Location.Y);
-            //                    coin2--;
-            //                }
-            //            }
-            //            break;
-            //        case 2: // block
-            //            break;
-            //        case 3: // heal
-            //            if (coin < 3) 
-            //            { 
-            //                coin++;
-            //                coinValue.Location = new Point(coinValue.Location.X + 50, coinValue.Location.Y);
-            //            } 
-            //            break;
-            //    }
-            //else
-            //{
-            //    switch (pendingAction)
-            //    {
-            //        case 1: // attack
-            //            if (coin > 0)
-            //            {
-            //                if (action != 2)
-            //                {
-            //                    coinValue.Location = new Point(coinValue.Location.X - 50, coinValue.Location.Y);
-            //                    coin--;
-            //                }
-            //            }
-            //            break;
-            //        case 2: // block
-            //            break;
-            //        case 3: // heal
-            //            if (coin2 < 3)
-            //            {
-            //                coin2++;
-            //                coinValue2.Location = new Point(coinValue2.Location.X + 50, coinValue2.Location.Y);
-            //            }
-            //            break;
-            //    }
-            //}
-            if (playerGoesFirst)
+            UpdateCoinUI(ac, ap);
+            UpdateCoinUI(bc, bp);
+            if (ac == 0 || bc == 0) GameOver();
+        }
+
+        void UpdateCoinUI(int amount, Panel p)
+        {
+            switch (amount)
             {
-                // Player's action
-                if (pendingAction == 1 && coin2 > 0 && action2 != 2) // attack
-                {
-                    coin2--;
-                    coinValue2.Location = new Point(coinValue2.Location.X - 50, coinValue2.Location.Y);
-                }
-                else if (pendingAction == 3 && coin < 3) // heal
-                {
-                    coin++;
-                    coinValue.Location = new Point(coinValue.Location.X + 50, coinValue.Location.Y);
-                }
-                // Enemy's action
-                if (action2 == 1 && coin > 0 && pendingAction != 2) // attack
-                {
-                    coin--;
-                    coinValue.Location = new Point(coinValue.Location.X - 50, coinValue.Location.Y);
-                }
-                else if (action2 == 3 && coin2 < 3) // heal
-                {
-                    coin2++;
-                    coinValue2.Location = new Point(coinValue2.Location.X + 50, coinValue2.Location.Y);
-                }
-            }
-            else
-            {
-                // Enemy's action
-                if (action2 == 1 && coin > 0 && pendingAction != 2) // attack
-                {
-                    coin--;
-                    coinValue.Location = new Point(coinValue.Location.X - 50, coinValue.Location.Y);
-                }
-                else if (action2 == 3 && coin2 < 3) // heal
-                {
-                    coin2++;
-                    coinValue2.Location = new Point(coinValue2.Location.X + 50, coinValue2.Location.Y);
-                }
-                // Player's action
-                if (pendingAction == 1 && coin2 > 0 && action2 != 2) // attack
-                {
-                    coin2--;
-                    coinValue2.Location = new Point(coinValue2.Location.X - 50, coinValue2.Location.Y);
-                }
-                else if (pendingAction == 3 && coin < 3) // heal
-                {
-                    coin++;
-                    coinValue.Location = new Point(coinValue.Location.X + 50, coinValue.Location.Y);
-                }
+                case 0: p.Location = new Point(-150, p.Location.Y); break;
+                case 1: p.Location = new Point(-100, p.Location.Y); break;
+                case 2: p.Location = new Point(-50, p.Location.Y); break;
+                case 3: p.Location = new Point(0, p.Location.Y); break;
+                default: break;
             }
         }
 
+        void GameOver()
+        {
+            if (minutes != 0)
+                sharedAppData.time = $"{minutes}:{seconds}.{milliseconds}";
+            else
+                sharedAppData.time = $"{seconds}.{milliseconds}";
+            if (coin == coin2 && coin == 0)
+            {
+                sharedAppData.winner = "DRAW";
+            }
+                sharedAppData.winner = (coin == 0) ? "Player 2 wins" : "Player 1 wins";
+            gameOver go = new gameOver();
+            go.ShowDialog();
+            this.Close();
+        }
         void ChooseAction(int actionType)
         {
             pendingAction = actionType;
 
+            if (!sharedAppData.keepChoice)
+            {
+                // Let the player guess
+                GuessOddEven goe = new GuessOddEven();
+                goe.ShowDialog();
+                timer2.Start();
+            }
 
-            // Let the player guess
-            GuessOddEven goe = new GuessOddEven();
-            goe.ShowDialog();
 
             dice.Visible = true;
             diceTime.Start();
@@ -156,13 +93,13 @@ namespace Bagachi_Classico
             {
                 performTurn(pendingAction);
                 PerformEnemyTurn();
-                RefreshCoin();
+                RefreshCoin(pendingAction, coinValue, ref coin, action2, coinValue2, ref coin2);
             }
             else
             {
                 PerformEnemyTurn();
                 performTurn(pendingAction);
-                RefreshCoin();
+                RefreshCoin(action2, coinValue2, ref coin2, pendingAction, coinValue, ref coin);
             }
         }
         void AnimateP2(int act)
@@ -172,10 +109,29 @@ namespace Bagachi_Classico
         }
         void PerformEnemyTurn()
         {
-            Random r = new Random();
             //action2 = 1;
-            action2 = r.Next(1, 4);
-            AnimateP2(action2);
+            int temp = rnd.Next(100);
+
+            if (coin2 == 3 || temp < 50) // full health, attack
+            {
+                AnimateP2(1);
+            }
+            else if (temp < 10 || (coin2 < 2 && temp == 40)) // 10% chance to heal, more likely if coins are low
+            {
+                AnimateP2(3); // heal
+            }
+            else if (temp < 70 || (coin2 > 1 && temp < 80)) // 60% chance to attack, more likely if coins are high
+            {
+                AnimateP2(1); // attack
+            }
+            else if (temp < 100 || (coin2 < 3 && temp < 30)) // 30% chance to block, more likely if coins are low
+            {
+                AnimateP2(2); // block
+            }
+            else // default to idle
+            {
+                AnimateP2(2);
+            }
         }
         void performTurn(int a)
         {
@@ -321,5 +277,12 @@ namespace Bagachi_Classico
             StartTurnOrder();
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            mil += 100;
+            minutes = (mil / 1000) / 60;
+            seconds = (mil / 1000) % 60;
+            milliseconds = mil % 1000;
+        }
     }
 }

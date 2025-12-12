@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="gameOver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gameOver.Designer.cs">
+      <DependentUpon>gameOver.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuessOddEven.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="sharedAppData.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gameOver.resx">
+      <DependentUpon>gameOver.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GuessOddEven.resx">
       <DependentUpon>GuessOddEven.cs</DependentUpon>
