@@ -32,6 +32,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.diceTime = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.coinbar = new System.Windows.Forms.Panel();
+            this.coinValue = new System.Windows.Forms.Panel();
+            this.coinbar2 = new System.Windows.Forms.Panel();
+            this.coinValue2 = new System.Windows.Forms.Panel();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.spit2 = new System.Windows.Forms.PictureBox();
             this.spit = new System.Windows.Forms.PictureBox();
             this.dice = new System.Windows.Forms.PictureBox();
             this.P2 = new System.Windows.Forms.PictureBox();
@@ -39,12 +45,9 @@
             this.block_btn = new System.Windows.Forms.PictureBox();
             this.attack_btn = new System.Windows.Forms.PictureBox();
             this.P1 = new System.Windows.Forms.PictureBox();
-            this.spit2 = new System.Windows.Forms.PictureBox();
-            this.coinbar = new System.Windows.Forms.Panel();
-            this.coinValue = new System.Windows.Forms.Panel();
-            this.coinbar2 = new System.Windows.Forms.Panel();
-            this.coinValue2 = new System.Windows.Forms.Panel();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.coinbar.SuspendLayout();
+            this.coinbar2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2)).BeginInit();
@@ -52,9 +55,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.block_btn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.attack_btn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spit2)).BeginInit();
-            this.coinbar.SuspendLayout();
-            this.coinbar2.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -76,6 +76,57 @@
             this.label1.Size = new System.Drawing.Size(150, 24);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // coinbar
+            // 
+            this.coinbar.BackColor = System.Drawing.Color.Black;
+            this.coinbar.Controls.Add(this.coinValue);
+            this.coinbar.Location = new System.Drawing.Point(100, 28);
+            this.coinbar.Name = "coinbar";
+            this.coinbar.Size = new System.Drawing.Size(150, 50);
+            this.coinbar.TabIndex = 9;
+            // 
+            // coinValue
+            // 
+            this.coinValue.BackColor = System.Drawing.Color.Red;
+            this.coinValue.ForeColor = System.Drawing.Color.Transparent;
+            this.coinValue.Location = new System.Drawing.Point(0, 0);
+            this.coinValue.Name = "coinValue";
+            this.coinValue.Size = new System.Drawing.Size(150, 50);
+            this.coinValue.TabIndex = 0;
+            // 
+            // coinbar2
+            // 
+            this.coinbar2.BackColor = System.Drawing.Color.Black;
+            this.coinbar2.Controls.Add(this.coinValue2);
+            this.coinbar2.Location = new System.Drawing.Point(562, 28);
+            this.coinbar2.Name = "coinbar2";
+            this.coinbar2.Size = new System.Drawing.Size(150, 50);
+            this.coinbar2.TabIndex = 10;
+            // 
+            // coinValue2
+            // 
+            this.coinValue2.BackColor = System.Drawing.Color.Red;
+            this.coinValue2.ForeColor = System.Drawing.Color.Transparent;
+            this.coinValue2.Location = new System.Drawing.Point(0, 0);
+            this.coinValue2.Name = "coinValue2";
+            this.coinValue2.Size = new System.Drawing.Size(150, 50);
+            this.coinValue2.TabIndex = 0;
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // spit2
+            // 
+            this.spit2.BackColor = System.Drawing.Color.Transparent;
+            this.spit2.Image = global::Bagachi_Classico.Properties.Resources.spit1;
+            this.spit2.Location = new System.Drawing.Point(256, 196);
+            this.spit2.Name = "spit2";
+            this.spit2.Size = new System.Drawing.Size(300, 20);
+            this.spit2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.spit2.TabIndex = 8;
+            this.spit2.TabStop = false;
             // 
             // spit
             // 
@@ -153,57 +204,6 @@
             this.P1.TabIndex = 0;
             this.P1.TabStop = false;
             // 
-            // spit2
-            // 
-            this.spit2.BackColor = System.Drawing.Color.Transparent;
-            this.spit2.Image = global::Bagachi_Classico.Properties.Resources.spit1;
-            this.spit2.Location = new System.Drawing.Point(256, 196);
-            this.spit2.Name = "spit2";
-            this.spit2.Size = new System.Drawing.Size(300, 20);
-            this.spit2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.spit2.TabIndex = 8;
-            this.spit2.TabStop = false;
-            // 
-            // coinbar
-            // 
-            this.coinbar.BackColor = System.Drawing.Color.Black;
-            this.coinbar.Controls.Add(this.coinValue);
-            this.coinbar.Location = new System.Drawing.Point(100, 28);
-            this.coinbar.Name = "coinbar";
-            this.coinbar.Size = new System.Drawing.Size(150, 50);
-            this.coinbar.TabIndex = 9;
-            // 
-            // coinValue
-            // 
-            this.coinValue.BackColor = System.Drawing.Color.Red;
-            this.coinValue.ForeColor = System.Drawing.Color.Transparent;
-            this.coinValue.Location = new System.Drawing.Point(0, 0);
-            this.coinValue.Name = "coinValue";
-            this.coinValue.Size = new System.Drawing.Size(150, 50);
-            this.coinValue.TabIndex = 0;
-            // 
-            // coinbar2
-            // 
-            this.coinbar2.BackColor = System.Drawing.Color.Black;
-            this.coinbar2.Controls.Add(this.coinValue2);
-            this.coinbar2.Location = new System.Drawing.Point(562, 28);
-            this.coinbar2.Name = "coinbar2";
-            this.coinbar2.Size = new System.Drawing.Size(150, 50);
-            this.coinbar2.TabIndex = 10;
-            // 
-            // coinValue2
-            // 
-            this.coinValue2.BackColor = System.Drawing.Color.Red;
-            this.coinValue2.ForeColor = System.Drawing.Color.Transparent;
-            this.coinValue2.Location = new System.Drawing.Point(0, 0);
-            this.coinValue2.Name = "coinValue2";
-            this.coinValue2.Size = new System.Drawing.Size(150, 50);
-            this.coinValue2.TabIndex = 0;
-            // 
-            // timer2
-            // 
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
             // metaspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,6 +227,9 @@
             this.Name = "metaspace";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "metaspace";
+            this.coinbar.ResumeLayout(false);
+            this.coinbar2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2)).EndInit();
@@ -234,9 +237,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.block_btn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.attack_btn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.P1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spit2)).EndInit();
-            this.coinbar.ResumeLayout(false);
-            this.coinbar2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

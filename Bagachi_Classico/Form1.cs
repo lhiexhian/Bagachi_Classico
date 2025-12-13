@@ -20,7 +20,9 @@ namespace Bagachi_Classico
         private void main_Shown(object sender, EventArgs e)
         {
             // Show the metaspace form on startup
-            metaspace ms = new metaspace();
+            //metaspace ms = new metaspace();
+
+            LogIn ms = new LogIn();
             this.Hide();
             ms.Show();
         }

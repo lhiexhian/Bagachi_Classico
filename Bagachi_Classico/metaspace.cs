@@ -112,7 +112,7 @@ namespace Bagachi_Classico
             //action2 = 1;
             int temp = rnd.Next(100);
 
-            if (coin2 == 3 || temp < 50) // full health, attack
+            if (coin2 == 3 && temp < 50) // full health, attack
             {
                 AnimateP2(1);
             }
@@ -256,7 +256,6 @@ namespace Bagachi_Classico
 
             diceTime.Stop();
             rngCounter = 0;
-            Thread.Sleep(500);
             dice.Visible = false;
 
             bool correctGuess =

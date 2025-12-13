@@ -8,9 +8,12 @@ namespace Bagachi_Classico
 {
     public static class sharedAppData
     {
+        public static string conString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=datas;Integrated Security=True;Encrypt=False";
         public static bool guess { get; set; }
         public static bool keepChoice { get; set; }
         public static string winner { get; set; }
         public static string time { get; set; }
+
+        
     }
 }
