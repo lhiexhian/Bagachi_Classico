@@ -32,13 +32,16 @@ namespace Bagachi_Classico
 
         private void label3_Click(object sender, EventArgs e)
         {
+            MainMenu mm = new MainMenu();
+            mm.Show();
             this.Close();
         }
 
         private void gameOver_Shown(object sender, EventArgs e)
         {
 
-            timer.Text = $"ELAPSED TIME: {sharedAppData.time}";
+            Score.Text = $"SCORE: {sharedAppData.score}";
+            highScore.Text = $"HIGH SCORE: {sharedAppData.hscore}";
             label2.Text = sharedAppData.winner;
         }
     }

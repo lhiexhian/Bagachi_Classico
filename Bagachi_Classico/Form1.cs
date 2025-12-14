@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Bagachi_Classico
 {
-    public partial class main : Form
+    public partial class Main : Form
     {
-        public main()
+        public Main()
         {
             InitializeComponent();
         }
@@ -21,10 +21,15 @@ namespace Bagachi_Classico
         {
             // Show the metaspace form on startup
             //metaspace ms = new metaspace();
-
-            LogIn ms = new LogIn();
+            MainMenu ms = new MainMenu();
+            //LogIn ms = new LogIn();
             this.Hide();
             ms.Show();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

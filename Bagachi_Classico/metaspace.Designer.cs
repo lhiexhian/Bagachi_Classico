@@ -71,9 +71,9 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(325, 98);
+            this.label1.Location = new System.Drawing.Point(256, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 24);
+            this.label1.Size = new System.Drawing.Size(300, 24);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -227,6 +227,8 @@
             this.Name = "metaspace";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "metaspace";
+            this.Load += new System.EventHandler(this.metaspace_Load);
+            this.Shown += new System.EventHandler(this.metaspace_Shown);
             this.coinbar.ResumeLayout(false);
             this.coinbar2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spit2)).EndInit();

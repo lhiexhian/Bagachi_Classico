@@ -1,11 +1,13 @@
-﻿using System;
-using System.Threading;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +16,7 @@ namespace Bagachi_Classico
 
     public partial class metaspace : Form
     {
+
         int pendingAction = 0;
         int pendingAction2 = 0;
         bool playerGoesFirst = false;
@@ -27,6 +30,8 @@ namespace Bagachi_Classico
         int coin2 = 3;
         int rngCounter = 0;
         int mil = 0;
+        int days = 0;
+        int hours = 0;
         int minutes = 0;
         int seconds = 0;
         int milliseconds = 0;
@@ -34,7 +39,7 @@ namespace Bagachi_Classico
         void RefreshCoin(int a, Panel ap, ref int ac, int b, Panel bp, ref int bc)
         {
             if (a == 1 && b != 2) bc = Math.Max(bc - 1, 0); // A attacks unless B blocked
-            if (b == 1 && a != 2) ac = Math.Max(ac - 1, 0); 
+            if (b == 1 && a != 2) ac = Math.Max(ac - 1, 0);
             if (a == 3 && b != 1) ac = Math.Min(ac + 1, 3); // A heals if not attacked by B
             if (b == 3 && a != 1) bc = Math.Min(bc + 1, 3); // B heals if not attacked by A
 
@@ -57,19 +62,115 @@ namespace Bagachi_Classico
 
         void GameOver()
         {
-            if (minutes != 0)
-                sharedAppData.time = $"{minutes}:{seconds}.{milliseconds}";
-            else
-                sharedAppData.time = $"{seconds}.{milliseconds}";
-            if (coin == coin2 && coin == 0)
+            // 1. Determine winner
+            if (coin == coin2)
             {
                 sharedAppData.winner = "DRAW";
             }
-                sharedAppData.winner = (coin == 0) ? "Player 2 wins" : "Player 1 wins";
+            else if (coin == 0)
+            {
+                sharedAppData.winner = "Player 2 wins";
+            }
+            else
+            {
+                sharedAppData.winner = "Player 1 wins";
+            }
+
+            // 2. Update points, wins, and loses
+            using (SqlConnection conn = new SqlConnection(sharedAppData.conString))
+            {
+                string selectQuery = "SELECT HighScore, Win, Lose FROM Accounts WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", sharedAppData.Id);
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        int currentHighScore = 0;
+                        int wins = 0;
+                        int loses = 0;
+
+                        if (reader.Read())
+                        {
+                            currentHighScore = reader.GetInt32(0);
+                            wins = reader.GetInt32(1);
+                            loses = reader.GetInt32(2);
+                        }
+
+                        reader.Close();
+
+                        bool isDraw = coin == coin2;
+                        bool player1Wins = coin > coin2;
+                        bool player2Wins = coin < coin2;
+
+                        if (isDraw)
+                            sharedAppData.winner = "DRAW";
+                        else if (player1Wins)
+                            sharedAppData.winner = "Player 1 wins";
+                        else
+                            sharedAppData.winner = "Player 2 wins";
+
+                        // 2. Calculate points
+                        int baseWinPoints = 50;
+                        int drawPoints = 20;
+                        int coinMultiplier = 10;
+
+                        int player1Points = 0;
+
+                        if (isDraw)
+                        {
+                            player1Points = drawPoints + (coin * coinMultiplier / 2);
+                            sharedAppData.score = player1Points;
+                        }
+                        else if (player1Wins)
+                        {
+                            player1Points = baseWinPoints + (coin * coinMultiplier);
+                            sharedAppData.score = player1Points;
+                        }
+                        else // player2Wins
+                        {
+                            player1Points = coin + (baseWinPoints * coinMultiplier / 2);
+                            sharedAppData.score = player1Points;
+                        }
+                        sharedAppData.score = player1Points;
+                        // Update highscore if newPoints > currentHighScore
+                        if (player1Points > currentHighScore)
+                            currentHighScore = player1Points;
+
+
+                        // Update wins/loses
+                        if (sharedAppData.winner == "Player 1 wins")
+                            wins += 1;
+                        else if (sharedAppData.winner == "Player 2 wins")
+                            loses += 1;
+
+
+                        sharedAppData.hscore = currentHighScore;
+                        // Update the database
+                        string updateQuery = "UPDATE Accounts SET HighScore = @HighScore, Win = @Wins, Lose = @Loses WHERE Id = @Id";
+                        using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
+                        {
+                            updateCmd.Parameters.AddWithValue("@HighScore", currentHighScore);
+                            updateCmd.Parameters.AddWithValue("@Wins", wins);
+                            updateCmd.Parameters.AddWithValue("@Loses", loses);
+                            updateCmd.Parameters.AddWithValue("@Id", sharedAppData.Id);
+
+                            updateCmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+
+            // 3. Show Game Over dialog
             gameOver go = new gameOver();
             go.ShowDialog();
+
+            // 4. Close the current game form
             this.Close();
         }
+
+
         void ChooseAction(int actionType)
         {
             pendingAction = actionType;
@@ -211,7 +312,7 @@ namespace Bagachi_Classico
             {
                 actionVar = 0;
                 if (pic == spit || pic == spit2) pic.Visible = false;
-            } 
+            }
         }
 
 
@@ -279,9 +380,21 @@ namespace Bagachi_Classico
         private void timer2_Tick(object sender, EventArgs e)
         {
             mil += 100;
+            days = (mil / 1000) / 86400;
+            hours = (mil / 1000) / 3600;
             minutes = (mil / 1000) / 60;
             seconds = (mil / 1000) % 60;
             milliseconds = mil % 1000;
+        }
+
+        private void metaspace_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metaspace_Shown(object sender, EventArgs e)
+        {
+            label1.Text = $"welcome {sharedAppData.Username}";
         }
     }
 }

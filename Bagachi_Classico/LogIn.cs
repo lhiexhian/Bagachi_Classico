@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bagachi_Classico
@@ -20,44 +14,77 @@ namespace Bagachi_Classico
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            string username = uname.Text;
-            string password = pword.Text;
-
-            string query = "SELECT COUNT(1) FROM Accounts WHERE Username=@Username AND Password=@Password";
-
-            // Use 'using' statements to ensure proper disposal of SQL objects
-            using (SqlConnection connection = new SqlConnection(sharedAppData.conString))
+            // 1. Basic validation
+            if (string.IsNullOrWhiteSpace(uname.Text) || string.IsNullOrWhiteSpace(pword.Text))
             {
+                MessageBox.Show("Invalid username or password.");
+                return;
+            }
+
+            string query = @"
+                SELECT Id, Username, Email, Bio, isActive, HighScore, Win, Lose
+                FROM Accounts
+                WHERE Username = @Username AND Password = @Password";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(sharedAppData.conString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Use parameters to prevent SQL injection
-                    command.Parameters.AddWithValue("@Username", username);
-                    command.Parameters.AddWithValue("@Password", password); // Use hashed password here
+                    command.Parameters.Add("@Username", SqlDbType.VarChar).Value = uname.Text;
+                    command.Parameters.Add("@Password", SqlDbType.VarChar).Value = pword.Text;
 
-                    try
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        connection.Open();
-                        // ExecuteScalar retrieves a single value (the count)
-                        int count = (int)command.ExecuteScalar();
-
-                        if (count == 1)
-                        {
-                            MessageBox.Show("Login successful!");
-                            // Proceed to the main application form
-                            metaspace ms = new metaspace();
-                            ms.Show();
-                            this.Hide(); // Hide the login form
-                        }
-                        else
+                        if (!reader.Read())
                         {
                             MessageBox.Show("Invalid username or password.");
+                            return;
                         }
+
+                        // 2. Load user data into sharedAppData
+                        sharedAppData.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                        sharedAppData.Username = reader.GetString(reader.GetOrdinal("Username"));
+                        sharedAppData.Email = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString(reader.GetOrdinal("Email"));
+                        sharedAppData.Bio = reader.IsDBNull(reader.GetOrdinal("Bio")) ? string.Empty : reader.GetString(reader.GetOrdinal("Bio"));
+                        sharedAppData.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
+                        sharedAppData.HighScorePoints = reader.GetInt32(reader.GetOrdinal("HighScore"));
+                        sharedAppData.Wins = reader.GetInt32(reader.GetOrdinal("Win"));
+                        sharedAppData.Loses = reader.GetInt32(reader.GetOrdinal("Lose"));
                     }
-                    catch (SqlException ex)
+
+                    // 3. Set all other accounts to isActive = false
+                    string deactivateQuery = "UPDATE Accounts SET isActive = 0 WHERE Id <> @UserId";
+                    using (SqlCommand deactivateCmd = new SqlCommand(deactivateQuery, connection))
                     {
-                        MessageBox.Show("Database error: " + ex.Message);
+                        deactivateCmd.Parameters.Add("@UserId", SqlDbType.Int).Value = sharedAppData.Id;
+                        deactivateCmd.ExecuteNonQuery();
                     }
+
+                    // 4. Activate this account
+                    string activateQuery = "UPDATE Accounts SET isActive = 1 WHERE Id = @UserId";
+                    using (SqlCommand activateCmd = new SqlCommand(activateQuery, connection))
+                    {
+                        activateCmd.Parameters.Add("@UserId", SqlDbType.Int).Value = sharedAppData.Id;
+                        activateCmd.ExecuteNonQuery();
+                    }
+
+                    // 5. Notify user and open game
+                    MessageBox.Show($"Login successful! Welcome, {sharedAppData.Username}");
+                    metaspace ms = new metaspace();
+                    ms.Show();
+                    this.Close();
                 }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unexpected error: " + ex.Message);
             }
         }
     }

@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Label();
+            this.Score = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.highScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -47,17 +48,17 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // timer
+            // Score
             // 
-            this.timer.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.timer.Font = new System.Drawing.Font("HoloLens MDL2 Assets", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.timer.Location = new System.Drawing.Point(0, 70);
-            this.timer.Name = "timer";
-            this.timer.Size = new System.Drawing.Size(300, 30);
-            this.timer.TabIndex = 1;
-            this.timer.Text = "ELAPSED TIME:";
-            this.timer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Score.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Score.Font = new System.Drawing.Font("HoloLens MDL2 Assets", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Score.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Score.Location = new System.Drawing.Point(0, 70);
+            this.Score.Name = "Score";
+            this.Score.Size = new System.Drawing.Size(300, 30);
+            this.Score.TabIndex = 1;
+            this.Score.Text = "ELAPSED TIME:";
+            this.Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -97,15 +98,28 @@
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // highScore
+            // 
+            this.highScore.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.highScore.Font = new System.Drawing.Font("HoloLens MDL2 Assets", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highScore.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.highScore.Location = new System.Drawing.Point(0, 100);
+            this.highScore.Name = "highScore";
+            this.highScore.Size = new System.Drawing.Size(300, 30);
+            this.highScore.TabIndex = 5;
+            this.highScore.Text = "ELAPSED TIME:";
+            this.highScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gameOver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 300);
+            this.Controls.Add(this.highScore);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.timer);
+            this.Controls.Add(this.Score);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "gameOver";
@@ -119,9 +133,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label timer;
+        private System.Windows.Forms.Label Score;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label highScore;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Bagachi_Classico
 {
-    partial class main
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // main
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "main";
+            this.ClientSize = new System.Drawing.Size(900, 450);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Main";
             this.Text = "Bagachi";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.Shown += new System.EventHandler(this.main_Shown);
             this.ResumeLayout(false);
 

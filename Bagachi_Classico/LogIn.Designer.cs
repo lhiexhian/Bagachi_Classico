@@ -44,7 +44,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(150, 224);
+            this.pictureBox2.Location = new System.Drawing.Point(140, 224);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(150, 60);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -110,7 +110,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Bagachi_Classico.Properties.Resources.Login;
-            this.pictureBox1.Location = new System.Drawing.Point(125, 50);
+            this.pictureBox1.Location = new System.Drawing.Point(117, 50);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(200, 70);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -121,6 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(450, 350);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel2);
