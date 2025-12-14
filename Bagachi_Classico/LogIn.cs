@@ -50,7 +50,7 @@ namespace Bagachi_Classico
                         sharedAppData.Email = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString(reader.GetOrdinal("Email"));
                         sharedAppData.Bio = reader.IsDBNull(reader.GetOrdinal("Bio")) ? string.Empty : reader.GetString(reader.GetOrdinal("Bio"));
                         sharedAppData.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
-                        sharedAppData.HighScorePoints = reader.GetInt32(reader.GetOrdinal("HighScore"));
+                        sharedAppData.hscore = reader.GetInt32(reader.GetOrdinal("HighScore"));
                         sharedAppData.Wins = reader.GetInt32(reader.GetOrdinal("Win"));
                         sharedAppData.Loses = reader.GetInt32(reader.GetOrdinal("Lose"));
                     }
@@ -73,7 +73,7 @@ namespace Bagachi_Classico
 
                     // 5. Notify user and open game
                     MessageBox.Show($"Login successful! Welcome, {sharedAppData.Username}");
-                    metaspace ms = new metaspace();
+                    MainMenu ms = new MainMenu();
                     ms.Show();
                     this.Close();
                 }

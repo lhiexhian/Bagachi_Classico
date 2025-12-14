@@ -318,6 +318,27 @@
   <ItemGroup>
     <None Include="Assets\BUTTONS\actionBTN.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\actionBTN2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\actionBTN3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\button_prototype.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\back.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

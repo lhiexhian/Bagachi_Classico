@@ -22,7 +22,6 @@ namespace Bagachi_Classico
         public static string Email { get; set; }
         public static string Bio { get; set; }
         public static bool IsActive { get; set; }
-        public static int HighScorePoints { get; set; }
         public static int Wins { get; set; }
         public static int Loses { get; set; }
     }

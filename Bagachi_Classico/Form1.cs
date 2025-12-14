@@ -21,8 +21,8 @@ namespace Bagachi_Classico
         {
             // Show the metaspace form on startup
             //metaspace ms = new metaspace();
-            MainMenu ms = new MainMenu();
-            //LogIn ms = new LogIn();
+            //MainMenu ms = new MainMenu();
+            LogIn ms = new LogIn();
             this.Hide();
             ms.Show();
         }

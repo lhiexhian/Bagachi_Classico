@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.edit = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -43,6 +44,7 @@
             this.Email = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Username = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -51,10 +53,24 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::Bagachi_Classico.Properties.Resources.button;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.Image = global::Bagachi_Classico.Properties.Resources.back;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 338);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // edit
             // 
-            this.edit.BackgroundImage = global::Bagachi_Classico.Properties.Resources.actionBTN;
+            this.edit.BackgroundImage = global::Bagachi_Classico.Properties.Resources.actionBTN3;
             this.edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.edit.Image = global::Bagachi_Classico.Properties.Resources.edit;
             this.edit.Location = new System.Drawing.Point(381, 178);
             this.edit.Name = "edit";
             this.edit.Size = new System.Drawing.Size(50, 50);
@@ -193,6 +209,7 @@
             this.Bio.Size = new System.Drawing.Size(190, 80);
             this.Bio.TabIndex = 0;
             this.Bio.Text = "etwywy";
+            this.Bio.TextChanged += new System.EventHandler(this.Bio_TextChanged);
             // 
             // panel3
             // 
@@ -218,6 +235,7 @@
             this.Email.Size = new System.Drawing.Size(180, 12);
             this.Email.TabIndex = 0;
             this.Email.Text = "etwywy";
+            this.Email.TextChanged += new System.EventHandler(this.Email_TextChanged);
             // 
             // panel2
             // 
@@ -244,6 +262,7 @@
             this.Username.Size = new System.Drawing.Size(180, 12);
             this.Username.TabIndex = 0;
             this.Username.Text = "etwywy";
+            this.Username.TextChanged += new System.EventHandler(this.Username_TextChanged);
             // 
             // Profile
             // 
@@ -252,6 +271,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(500, 400);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.edit);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -259,6 +279,7 @@
             this.Name = "Profile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profile";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edit)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -290,5 +311,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox edit;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

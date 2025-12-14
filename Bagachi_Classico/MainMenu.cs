@@ -88,5 +88,11 @@ namespace Bagachi_Classico
             Profile pf = new Profile();
             pf.ShowDialog();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            // Exit the application
+            Application.Exit();
+        }
     }
 }

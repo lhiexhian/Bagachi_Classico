@@ -144,7 +144,8 @@ namespace Bagachi_Classico
                             wins += 1;
                         else if (sharedAppData.winner == "Player 2 wins")
                             loses += 1;
-
+                        sharedAppData.Wins = wins;
+                        sharedAppData.Loses = loses;
 
                         sharedAppData.hscore = currentHighScore;
                         // Update the database
