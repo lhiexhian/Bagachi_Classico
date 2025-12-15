@@ -32,23 +32,20 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.diceTime = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.coinbar = new System.Windows.Forms.Panel();
-            this.coinValue = new System.Windows.Forms.Panel();
-            this.coinbar2 = new System.Windows.Forms.Panel();
-            this.coinValue2 = new System.Windows.Forms.Panel();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.spit2 = new System.Windows.Forms.PictureBox();
-            this.spit = new System.Windows.Forms.PictureBox();
+            this.coinValue2 = new System.Windows.Forms.PictureBox();
+            this.coinValue = new System.Windows.Forms.PictureBox();
             this.dice = new System.Windows.Forms.PictureBox();
             this.P2 = new System.Windows.Forms.PictureBox();
             this.heal_btn = new System.Windows.Forms.PictureBox();
             this.block_btn = new System.Windows.Forms.PictureBox();
             this.attack_btn = new System.Windows.Forms.PictureBox();
             this.P1 = new System.Windows.Forms.PictureBox();
-            this.coinbar.SuspendLayout();
-            this.coinbar2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spit)).BeginInit();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.flickerTimerP1 = new System.Windows.Forms.Timer(this.components);
+            this.flickerTimerP2 = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.coinValue2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coinValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heal_btn)).BeginInit();
@@ -77,67 +74,29 @@
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // coinbar
-            // 
-            this.coinbar.BackColor = System.Drawing.Color.Black;
-            this.coinbar.Controls.Add(this.coinValue);
-            this.coinbar.Location = new System.Drawing.Point(100, 28);
-            this.coinbar.Name = "coinbar";
-            this.coinbar.Size = new System.Drawing.Size(150, 50);
-            this.coinbar.TabIndex = 9;
-            // 
-            // coinValue
-            // 
-            this.coinValue.BackColor = System.Drawing.Color.Red;
-            this.coinValue.ForeColor = System.Drawing.Color.Transparent;
-            this.coinValue.Location = new System.Drawing.Point(0, 0);
-            this.coinValue.Name = "coinValue";
-            this.coinValue.Size = new System.Drawing.Size(150, 50);
-            this.coinValue.TabIndex = 0;
-            // 
-            // coinbar2
-            // 
-            this.coinbar2.BackColor = System.Drawing.Color.Black;
-            this.coinbar2.Controls.Add(this.coinValue2);
-            this.coinbar2.Location = new System.Drawing.Point(562, 28);
-            this.coinbar2.Name = "coinbar2";
-            this.coinbar2.Size = new System.Drawing.Size(150, 50);
-            this.coinbar2.TabIndex = 10;
-            // 
-            // coinValue2
-            // 
-            this.coinValue2.BackColor = System.Drawing.Color.Red;
-            this.coinValue2.ForeColor = System.Drawing.Color.Transparent;
-            this.coinValue2.Location = new System.Drawing.Point(0, 0);
-            this.coinValue2.Name = "coinValue2";
-            this.coinValue2.Size = new System.Drawing.Size(150, 50);
-            this.coinValue2.TabIndex = 0;
-            // 
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // spit2
+            // coinValue2
             // 
-            this.spit2.BackColor = System.Drawing.Color.Transparent;
-            this.spit2.Image = global::Bagachi_Classico.Properties.Resources.spit1;
-            this.spit2.Location = new System.Drawing.Point(256, 196);
-            this.spit2.Name = "spit2";
-            this.spit2.Size = new System.Drawing.Size(300, 20);
-            this.spit2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.spit2.TabIndex = 8;
-            this.spit2.TabStop = false;
+            this.coinValue2.Image = global::Bagachi_Classico.Properties.Resources.health1;
+            this.coinValue2.Location = new System.Drawing.Point(551, 27);
+            this.coinValue2.Name = "coinValue2";
+            this.coinValue2.Size = new System.Drawing.Size(180, 60);
+            this.coinValue2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.coinValue2.TabIndex = 12;
+            this.coinValue2.TabStop = false;
             // 
-            // spit
+            // coinValue
             // 
-            this.spit.BackColor = System.Drawing.Color.Transparent;
-            this.spit.Image = global::Bagachi_Classico.Properties.Resources.spit1;
-            this.spit.Location = new System.Drawing.Point(256, 196);
-            this.spit.Name = "spit";
-            this.spit.Size = new System.Drawing.Size(300, 20);
-            this.spit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.spit.TabIndex = 7;
-            this.spit.TabStop = false;
+            this.coinValue.Image = global::Bagachi_Classico.Properties.Resources.health1;
+            this.coinValue.Location = new System.Drawing.Point(79, 27);
+            this.coinValue.Name = "coinValue";
+            this.coinValue.Size = new System.Drawing.Size(180, 60);
+            this.coinValue.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.coinValue.TabIndex = 11;
+            this.coinValue.TabStop = false;
             // 
             // dice
             // 
@@ -162,36 +121,48 @@
             // 
             // heal_btn
             // 
+            this.heal_btn.BackgroundImage = global::Bagachi_Classico.Properties.Resources.button;
+            this.heal_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.heal_btn.Image = global::Bagachi_Classico.Properties.Resources.heal;
-            this.heal_btn.Location = new System.Drawing.Point(502, 306);
+            this.heal_btn.Location = new System.Drawing.Point(562, 323);
             this.heal_btn.Name = "heal_btn";
             this.heal_btn.Size = new System.Drawing.Size(200, 100);
             this.heal_btn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.heal_btn.TabIndex = 3;
             this.heal_btn.TabStop = false;
             this.heal_btn.Click += new System.EventHandler(this.heal_btn_Click);
+            this.heal_btn.MouseLeave += new System.EventHandler(this.heal_btn_MouseLeave);
+            this.heal_btn.MouseHover += new System.EventHandler(this.heal_btn_MouseHover);
             // 
             // block_btn
             // 
+            this.block_btn.BackgroundImage = global::Bagachi_Classico.Properties.Resources.button;
+            this.block_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.block_btn.Image = global::Bagachi_Classico.Properties.Resources.block;
-            this.block_btn.Location = new System.Drawing.Point(296, 306);
+            this.block_btn.Location = new System.Drawing.Point(304, 323);
             this.block_btn.Name = "block_btn";
             this.block_btn.Size = new System.Drawing.Size(200, 100);
             this.block_btn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.block_btn.TabIndex = 2;
             this.block_btn.TabStop = false;
             this.block_btn.Click += new System.EventHandler(this.block_btn_Click);
+            this.block_btn.MouseLeave += new System.EventHandler(this.block_btn_MouseLeave);
+            this.block_btn.MouseHover += new System.EventHandler(this.block_btn_MouseHover);
             // 
             // attack_btn
             // 
+            this.attack_btn.BackgroundImage = global::Bagachi_Classico.Properties.Resources.button;
+            this.attack_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.attack_btn.Image = global::Bagachi_Classico.Properties.Resources.attack;
-            this.attack_btn.Location = new System.Drawing.Point(90, 306);
+            this.attack_btn.Location = new System.Drawing.Point(50, 323);
             this.attack_btn.Name = "attack_btn";
             this.attack_btn.Size = new System.Drawing.Size(200, 100);
             this.attack_btn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.attack_btn.TabIndex = 1;
             this.attack_btn.TabStop = false;
             this.attack_btn.Click += new System.EventHandler(this.attack_btn_Click);
+            this.attack_btn.MouseLeave += new System.EventHandler(this.atk_btn_MouseLeave);
+            this.attack_btn.MouseHover += new System.EventHandler(this.attack_btn_MouseHover);
             // 
             // P1
             // 
@@ -208,13 +179,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkGray;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.coinbar2);
-            this.Controls.Add(this.coinbar);
-            this.Controls.Add(this.spit2);
-            this.Controls.Add(this.spit);
+            this.Controls.Add(this.coinValue2);
+            this.Controls.Add(this.coinValue);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dice);
             this.Controls.Add(this.P2);
@@ -229,10 +198,8 @@
             this.Text = "metaspace";
             this.Load += new System.EventHandler(this.metaspace_Load);
             this.Shown += new System.EventHandler(this.metaspace_Shown);
-            this.coinbar.ResumeLayout(false);
-            this.coinbar2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coinValue2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coinValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.heal_btn)).EndInit();
@@ -253,12 +220,11 @@
         private System.Windows.Forms.PictureBox dice;
         private System.Windows.Forms.Timer diceTime;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox spit;
-        private System.Windows.Forms.PictureBox spit2;
-        private System.Windows.Forms.Panel coinbar;
-        private System.Windows.Forms.Panel coinValue;
-        private System.Windows.Forms.Panel coinbar2;
-        private System.Windows.Forms.Panel coinValue2;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.PictureBox coinValue;
+        private System.Windows.Forms.PictureBox coinValue2;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer flickerTimerP1;
+        private System.Windows.Forms.Timer flickerTimerP2;
     }
 }

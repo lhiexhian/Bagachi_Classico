@@ -84,27 +84,68 @@ namespace Bagachi_Classico
 
         private void Username_TextChanged(object sender, EventArgs e)
         {
-            edit.Image = Properties.Resources.save;
-            edit.BackgroundImage = Properties.Resources.actionBTN3;
+            //check if length is different
+            if (Username.Text.Length != sharedAppData.Username.Length && Username.Text != sharedAppData.Username)
+            {
+                edit.Image = Properties.Resources.save;
+                edit.BackgroundImage = Properties.Resources.actionBTN3;
+
+            }
         }
 
         private void Email_TextChanged(object sender, EventArgs e)
         {
-            edit.Image = Properties.Resources.save;
-            edit.BackgroundImage = Properties.Resources.actionBTN3;
+            //check if length is different
+            if (Email.Text.Length != sharedAppData.Email.Length && Email.Text != sharedAppData.Email)
+            {
+                edit.Image = Properties.Resources.save;
+                edit.BackgroundImage = Properties.Resources.actionBTN3;
+            }
 
         }
 
         private void Bio_TextChanged(object sender, EventArgs e)
         {
-            edit.Image = Properties.Resources.save;
-            edit.BackgroundImage = Properties.Resources.actionBTN3;
+            //check if length is different
+            if (Bio.Text.Length != sharedAppData.Bio.Length && Bio.Text != sharedAppData.Bio)
+            {
+                edit.Image = Properties.Resources.save;
+                edit.BackgroundImage = Properties.Resources.actionBTN3;
+            }
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             MainMenu mm = new MainMenu();
             mm.Show();
+            this.Close();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            //log out user
+            // ask for confirmation
+            var result = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                return; // User canceled logout
+            }
+
+            // Update database to set isActive to 0
+            // Save to database
+            // direct to login form
+            string query = @"UPDATE Accounts 
+                     SET isActive = 0
+                     WHERE Id = @Id"; // BEST OPTION
+            using (SqlConnection con = new SqlConnection(sharedAppData.conString))
+                using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@Id", sharedAppData.Id); // make sure this exists
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            LogIn li = new LogIn();
+            li.Show();
             this.Close();
         }
     }

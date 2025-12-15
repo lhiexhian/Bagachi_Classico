@@ -78,15 +78,16 @@ namespace Bagachi_Classico
 
         private void play_Click(object sender, EventArgs e)
         {
-            metaspace ms = new metaspace();
-            ms.Show();
-            this.Close();
+            metaspace meta = new metaspace();
+            meta.Show();
+            this.Hide(); // keep the form alive so timers/controls aren't disposed unexpectedly
         }
 
         private void profile_Click(object sender, EventArgs e)
         {
             Profile pf = new Profile();
-            pf.ShowDialog();
+            pf.Show();
+            this.Hide();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

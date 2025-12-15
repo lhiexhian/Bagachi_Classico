@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,26 +35,52 @@ namespace Bagachi_Classico
         int seconds = 0;
         int milliseconds = 0;
 
-        void RefreshCoin(int a, Panel ap, ref int ac, int b, Panel bp, ref int bc)
-        {
-            if (a == 1 && b != 2) bc = Math.Max(bc - 1, 0); // A attacks unless B blocked
-            if (b == 1 && a != 2) ac = Math.Max(ac - 1, 0);
-            if (a == 3 && b != 1) ac = Math.Min(ac + 1, 3); // A heals if not attacked by B
-            if (b == 3 && a != 1) bc = Math.Min(bc + 1, 3); // B heals if not attacked by A
+        // Flicker animation state
+        private int flickerTicksP1 = 0;
+        private int flickerTicksP2 = 0;
+        private const int FlickerTickCount = 6; // total toggles (adjust for faster/slower flicker)
+        private const int FlickerIntervalMs = 100; // interval per toggle
 
+        void RefreshCoin(int a, PictureBox ap, ref int ac, int b, PictureBox bp, ref int bc)
+        {
+
+            int oldAc = ac;
+            int oldBc = bc;
+
+            if (a == 1 && b == 1) bc = Math.Max(bc - 1, 0);
+
+            if (b == 1 && a == 1) ac = Math.Max(ac - 1, 0);
+
+            if (a == 3 && b != 1) ac = Math.Min(ac + 1, 3);
+
+            if (b == 3 && a != 1) bc = Math.Min(bc + 1, 3);
+
+            // Update visuals
             UpdateCoinUI(ac, ap);
             UpdateCoinUI(bc, bp);
+
+            // Start flicker animation when a player's coin count is reduced
+            if (ac < oldAc)
+            {
+                StartFlickerP1();
+            }
+
+            if (bc < oldBc)
+            {
+                StartFlickerP2();
+            }
+
             if (ac == 0 || bc == 0) GameOver();
         }
 
-        void UpdateCoinUI(int amount, Panel p)
+        void UpdateCoinUI(int amount, PictureBox p)
         {
             switch (amount)
             {
-                case 0: p.Location = new Point(-150, p.Location.Y); break;
-                case 1: p.Location = new Point(-100, p.Location.Y); break;
-                case 2: p.Location = new Point(-50, p.Location.Y); break;
-                case 3: p.Location = new Point(0, p.Location.Y); break;
+                case 0: p.Image = Bagachi_Classico.Properties.Resources.health4; break;
+                case 1: p.Image = Bagachi_Classico.Properties.Resources.health3; break;
+                case 2: p.Image = Bagachi_Classico.Properties.Resources.health2; break;
+                case 3: p.Image = Bagachi_Classico.Properties.Resources.health1; break;
                 default: break;
             }
         }
@@ -114,18 +139,20 @@ namespace Bagachi_Classico
                         // 2. Calculate points
                         int baseWinPoints = 50;
                         int drawPoints = 20;
-                        int coinMultiplier = 10;
+                        //coinMultiplier based on how many time has passed
+
+                        int coinMultiplier = (seconds/30) * (10/baseWinPoints) + 10;
 
                         int player1Points = 0;
 
                         if (isDraw)
                         {
-                            player1Points = drawPoints + (coin * coinMultiplier / 2);
+                            player1Points = drawPoints + (coin * coinMultiplier / 2) + (baseWinPoints * coinMultiplier / 2);
                             sharedAppData.score = player1Points;
                         }
                         else if (player1Wins)
                         {
-                            player1Points = baseWinPoints + (coin * coinMultiplier);
+                            player1Points = baseWinPoints + (coin * coinMultiplier) + (baseWinPoints * coinMultiplier / 2);
                             sharedAppData.score = player1Points;
                         }
                         else // player2Wins
@@ -243,12 +270,24 @@ namespace Bagachi_Classico
         public metaspace()
         {
             InitializeComponent();
-            P2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            timer1.Start();
+
+            // safe image flip (guard against null)
+            if (P2?.Image != null)
+                P2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
             dice.Visible = false;
-            spit.Visible = false;
-            spit2.Visible = false;
+
+            // initialize flicker timers
+            flickerTimerP1.Interval = FlickerIntervalMs;
+            flickerTimerP1.Tick += FlickerTimerP1_Tick;
+
+            flickerTimerP2.Interval = FlickerIntervalMs;
+            flickerTimerP2.Tick += FlickerTimerP2_Tick;
+
+            // don't start timer1 here — start in Shown where the form is displayed
+            // timer1.Start();
         }
+
         private void UpdatePlayer1Animation()
         {
             switch (action)
@@ -258,8 +297,6 @@ namespace Bagachi_Classico
                     break;
                 case 1:
                     ShowFrame(P1, "attack", 4, counter, ref action, true);
-                    int spitAnim = -1;
-                    ShowFrame(spit, "spit", 4, counter, ref spitAnim, true);
 
                     break;
                 case 2:
@@ -270,6 +307,7 @@ namespace Bagachi_Classico
                     break;
             }
         }
+
         private void UpdatePlayer2Animation()
         {
             switch (action2)
@@ -279,8 +317,6 @@ namespace Bagachi_Classico
                     break;
                 case 1:
                     ShowFrame(P2, "attack", 4, counter2, ref action2, true);
-                    int spit2Anim = -1;
-                    ShowFrame(spit2, "spit", 4, counter2, ref spit2Anim, true);
                     break;
                 case 2:
                     ShowFrame(P2, "block", 4, counter2, ref action2, true);
@@ -290,8 +326,8 @@ namespace Bagachi_Classico
                     break;
             }
 
-            P2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            spit2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            if (P2?.Image != null)
+                P2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
         private void ShowFrame(PictureBox pic, string animName, int totalFrames, int localCounter, ref int actionVar, bool reset = false)
         {
@@ -306,19 +342,19 @@ namespace Bagachi_Classico
             if (img != null)
             {
                 pic.Image = img;
-                pic.Visible = true; //to show visibile
             }
 
             if (frame == totalFrames - 1 && reset)
             {
                 actionVar = 0;
-                if (pic == spit || pic == spit2) pic.Visible = false;
             }
         }
 
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (this.IsDisposed || this.Disposing) return;
+
             UpdatePlayer1Animation();
             UpdatePlayer2Animation();
 
@@ -329,16 +365,19 @@ namespace Bagachi_Classico
         private void attack_btn_Click(object sender, EventArgs e)
         {
             ChooseAction(1);
+            attack_btn.BackgroundImage = Properties.Resources.button_pressed;
         }
 
         private void block_btn_Click(object sender, EventArgs e)
         {
             ChooseAction(2);
+            block_btn.BackgroundImage = Properties.Resources.button_pressed;
         }
 
         private void heal_btn_Click(object sender, EventArgs e)
         {
             ChooseAction(3);
+            heal_btn.BackgroundImage = Properties.Resources.button_pressed;
         }
 
 
@@ -396,6 +435,102 @@ namespace Bagachi_Classico
         private void metaspace_Shown(object sender, EventArgs e)
         {
             label1.Text = $"welcome {sharedAppData.Username}";
+            if (!timer1.Enabled)
+                timer1.Start();
+        }
+
+        // Flicker timer handlers and helpers
+        private void StartFlickerP1()
+        {
+            // if already flickering, reset the count to full duration
+            flickerTicksP1 = FlickerTickCount;
+            flickerTimerP1?.Start();
+        }
+
+        private void StartFlickerP2()
+        {
+            flickerTicksP2 = FlickerTickCount;
+            flickerTimerP2?.Start();
+        }
+
+        private void FlickerTimerP1_Tick(object sender, EventArgs e)
+        {
+            if (this.IsDisposed || this.Disposing)
+            {
+                flickerTimerP1.Stop();
+                return;
+            }
+
+            if (flickerTicksP1 <= 0)
+            {
+                flickerTimerP1.Stop();
+                if (P1 != null) P1.Visible = true;
+                return;
+            }
+
+            if (P1 != null)
+                P1.Visible = !P1.Visible;
+
+            flickerTicksP1--;
+            if (flickerTicksP1 == 0)
+            {
+                if (P1 != null) P1.Visible = true;
+                flickerTimerP1.Stop();
+            }
+        }
+
+        private void FlickerTimerP2_Tick(object sender, EventArgs e)
+        {
+            if (this.IsDisposed || this.Disposing)
+            {
+                flickerTimerP2.Stop();
+                return;
+            }
+
+            if (flickerTicksP2 <= 0)
+            {
+                flickerTimerP2.Stop();
+                if (P2 != null) P2.Visible = true;
+                return;
+            }
+
+            if (P2 != null)
+                P2.Visible = !P2.Visible;
+
+            flickerTicksP2--;
+            if (flickerTicksP2 == 0)
+            {
+                if (P2 != null) P2.Visible = true;
+                flickerTimerP2.Stop();
+            }
+        }
+
+        private void attack_btn_MouseHover(object sender, EventArgs e)
+        {
+            attack_btn.BackgroundImage = Properties.Resources.button_hover;
+        }
+        private void block_btn_MouseHover(object sender, EventArgs e)
+        {
+            block_btn.BackgroundImage = Properties.Resources.button_hover;
+        }
+        private void heal_btn_MouseHover(object sender, EventArgs e)
+        {
+            heal_btn.BackgroundImage = Properties.Resources.button_hover;
+        }
+
+        private void atk_btn_MouseLeave(object sender, EventArgs e)
+        {
+            attack_btn.BackgroundImage = Properties.Resources.button;
+        }
+
+        private void block_btn_MouseLeave(object sender, EventArgs e)
+        {
+            block_btn.BackgroundImage = Properties.Resources.button;
+        }
+
+        private void heal_btn_MouseLeave(object sender, EventArgs e)
+        {
+            heal_btn.BackgroundImage = Properties.Resources.button;
         }
     }
 }

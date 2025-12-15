@@ -19,6 +19,7 @@ namespace Bagachi_Classico
 
         private void main_Shown(object sender, EventArgs e)
         {
+
             // Show the metaspace form on startup
             //metaspace ms = new metaspace();
             //MainMenu ms = new MainMenu();

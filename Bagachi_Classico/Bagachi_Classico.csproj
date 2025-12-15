@@ -339,6 +339,33 @@
   <ItemGroup>
     <None Include="Assets\BUTTONS\back.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\sign up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\sign up2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\login2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\BUTTONS\button_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\HEALTH\health1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\HEALTH\health2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\HEALTH\health3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\HEALTH\health4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
